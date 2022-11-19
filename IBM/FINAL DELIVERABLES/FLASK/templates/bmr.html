@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>FIT-NUTRO - BMR</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="{{url_for('static',filename='vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="{{url_for('static',filename='css/sb-admin-2.min.css')}}">
+</head>
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- side bar -->
+        {% include 'includes/sidebar.html' %}
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- top bar -->
+                {% include 'includes/topbar.html' %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                        <!-- body content -->
+                   <!-- Page Heading -->
+                   <h1 class="h3 mb-1 text-gray-800">BMR</h1>
+                   <p class="mb-4">The basal metabolic rate (BMR) and calorie calculator is an excellent tool for estimating how many calories your body needs on a daily basis depending on the amount and intensity of your exercise regime.</p>
+
+                   <!-- Content Row -->
+                   <div class="row">
+
+                     <div class="col-xl-8 col-lg-7">
+                       <div class="card shadow mb-4">
+                         <div class="card-header py-3">
+                           <h6 class="m-0 font-weight-bold text-primary">BMR calcator</h6>
+                       </div>
+                       <div class="card-body">
+                           <form  onsubmit="return false">
+
+                               <div class="form-group row">
+                                 <label for="age" class="col-sm-2 col-form-label">Age</label>
+                                 <div class="col-sm-10">
+                                   <input type="number" class="form-control" id="age" placeholder="Ages 10-80">
+                                   <span  class="text-danger" id="age_error"></span>
+                                 </div>
+                               </div>
+                 
+                               <fieldset class="form-group">
+                                 <div class="row">
+                                   <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
+                                   <div class="col-sm-10" id="form-radio">
+                                     <div class="custom-control custom-radio custom-control-inline">
+                                       <input type="radio" id="male" name="customRadioInline1" class="custom-control-input" checked="checked">
+                                       <label class="custom-control-label" for="male">Male</label>
+                                     </div>
+                                     <div class="custom-control custom-radio custom-control-inline">
+                                       <input type="radio" id="female" name="customRadioInline1" class="custom-control-input">
+                                       <label class="custom-control-label" for="female">Female</label>
+                                     </div>  
+                                   </div>
+                                 </div> 
+                               </fieldset> 
+                 
+                               <div class="form-group row">
+                                 <label for="weight" class="col-sm-2 col-form-label">Weight</label>
+                                 <div class="col-sm-10">
+                                   <input type="number" class="form-control" id="weight" placeholder="In kilograms">
+                                   <span  class="text-danger" id="weight_error"></span>
+                                 </div>
+                               </div>
+                 
+                               <div class="form-group row">
+                                 <label for="height" class="col-sm-2 col-form-label">Height</label>
+                                 <div class="col-sm-10">
+                                   <input type="number" class="form-control" id="height" placeholder="In centimeters">
+                                   <span  class="text-danger" id="height_error"></span>
+                                 </div>
+                               </div>
+                               
+                               <div class="form-group row">
+                                 <legend class="col-form-label col-sm-2 pt-0">Activity</legend>
+                                 <select class="custom-select col-sm-10" id="list">
+                                   <option selected value="1">Sedentary (little or no exercise)</option>
+                                   <option value="2">Lightly active (light exercise/sports 1-3 days/week)</option>
+                                   <option value="3">Moderately active (moderate exercise/sports 3-5 days/week)</option>
+                                   <option value="4">Very active (hard exercise/sports 6-7 days a week)</option>
+                                   <option value="5">Extra active (very hard exercise/sports & physical job or 2x training)</option>
+                                 </select>
+                               </div>
+                 
+                               <div class="form-group">
+                                   <input type="submit" onclick="getbmrvalue()" value="Calculate" class="btn btn-success"">
+                               </div>
+                               
+                           </form>
+                       </div>
+                       <div class="card-footer text-center">
+                           <span id="result" class="text-primary"></span>
+                       </div>
+                       </div>
+                   </div>
+                   <!-- end form -->
+
+
+                       <div class="col-xl-4 col-lg-7">
+
+                         <!-- Roitation Utilities -->
+                         <div class="card">
+                             <div class="card-header py-3">
+                                 <h5 class="m-0 font-weight-bold text-primary"><u>The calculator uses two formulas to calculate your body's daily calorie requirements</u></h5>
+                                 <br>
+                             </div>
+                             <div class="card-body">
+                                 <div ><b>1.Basal Metabolic Rate (BMR) Formula:</b><br>
+                                   The basal metabolic rate formula takes several variables like height, weight, age and gender to calculate your calorie needs as if you did not do any exercise.
+                                 </div>
+                                 <hr>
+                                 <div ><b>2.Harris Benedict Formula:</b>
+                                   <br>
+                                   The Harris Benedict Formula takes the number produced by the BMR formula and multiplies it depending on your activity level.
+                                 </div>
+                              </div>
+                          </div>
+                         </div>
+
+                         <!-- heading -->
+                         <div class="col-lg-12">
+
+                           <!-- Roitation Utilities -->
+                           <div class="card">
+                               <div class="card-header py-3">
+                                   <h6 class="m-0 font-weight-bold text-primary">Information about BMR</h6>
+                               </div>
+                               <div class="card-body">
+                                   <div>
+                                     The basal metabolic rate (BMR) is the amount of energy needed while resting in a temperate environment when the digestive system is inactive. It is the equivalent of figuring out how much gas an idle car consumes while parked. In such a state, energy will be used only to maintain vital organs, which include the heart, lungs, kidneys, nervous system, intestines, liver, lungs, sex organs, muscles, and skin. For most people, upwards of ~70% of total energy (calories) burned each day is due to upkeep. Physical activity makes up ~20% of expenditure and ~10% is used for the digestion of food, also known as thermogenesis.
+                                   </div><br>
+                                   <div>
+                                     The BMR is measured under very restrictive circumstances while awake. An accurate BMR measurement requires that a person's sympathetic nervous system is inactive, which means the person must be completely rested. Basal metabolism is usually the largest component of a person's total caloric needs. The daily caloric need is the BMR value multiplied by a factor with a value between 1.2 and 1.9, depending on activity level.
+                                   </div><br>
+                                   <div>
+                                     In most situations, the BMR is estimated with equations summarized from statistical data. The Harris-Benedict Equation was one of the earliest equations introduced. It was revised in 1984 to be more accurate and was used up until 1990, when the Mifflin-St Jeor Equation was introduced. The Mifflin-St Jeor Equation has been shown to be more accurate than the revised Harris-Benedict Equation. The Katch-McArdle Formula is slightly different in that it calculates resting daily energy expenditure (RDEE), which takes lean body mass into account, something that neither the Mifflin-St Jeor nor the Harris-Benedict Equation does. Of these equations, the Mifflin-St Jeor Equation is considered the most accurate equation for calculating BMR with the exception that the Katch-McArdle Formula can be more accurate for people who are leaner and know their body fat percentage. You can pick the equation to be used in the calculation by expanding the settings.
+                                   </div><br>
+                                   <div>
+                                     The three equations used by the calculator are listed below:
+                                   </div><br>
+                                   <div>
+                                         <Div class="m-0 font-weight-bold text-info">Mifflin-St Jeor Equation:</Div>
+                                         <div class="text-dark"><u>For men:</u></div>
+                                         <div >&nbsp;&nbsp; BMR = 10W + 6.25H - 5A + 5</div>
+                                         <div class="text-dark"><u>For women:</u></div>
+                                         <div >&nbsp;&nbsp; BMR = 10W + 6.25H - 5A - 161</div>
+                                   </div>
+                                   <br>
+                                   <div>
+                                     <Div class="m-0 font-weight-bold text-info">Revised Harris-Benedict Equation:</Div>
+                                     <div class="text-dark"><u>For men:</u></div>
+                                     <div >&nbsp;&nbsp; BMR = 13.397W + 4.799H - 5.677A + 88.362</div>
+                                     <div class="text-dark"><u>For women:</u></div>
+                                     <div >&nbsp;&nbsp; 
+                                       BMR = 9.247W + 3.098H - 4.330A + 447.593</div>
+                                   </div>
+                                   <br>
+                                   <div>
+                                     <Div class="m-0 font-weight-bold text-info">Katch-McArdle Formula:</Div>
+                                     <div >&nbsp;&nbsp; BMR = 370 + 21.6(1 - F)W</div>
+                                     <p>where:
+                                       <div style="padding-left:10px;">
+                                       W is body weight in kg<br>
+                                       H is body height in cm<br>
+                                       A is age<br>
+                                       F is body fat in percentage
+                                       </div></p>
+                                   </div>
+
+                                   <h3>BMR Variables</h3>
+                                      <p><b>Muscle Mass</b> &ndash; Aerobic exercises, such as running or cycling, have no effect on BMR. However, anaerobic exercises, such as weight-lifting, indirectly lead to a higher BMR because they build muscle mass, increasing resting energy consumption. The more muscle mass in the physical composition of an individual, the higher the BMR required to sustain their body at a certain level.</p>
+                                      <p><b>Age</b> &ndash; The more elderly and limber an individual, the lower their BMR, or the lower the minimum caloric intake required to sustain the functioning of their organs at a certain level.</p>
+                                      <p><b>Genetics</b> &ndash; Hereditary traits passed down from ancestors influence BMR.</p>
+                                      <p><b>Weather</b> &ndash; Cold environments raise BMR because of the energy required to create a homeostatic body temperature. Likewise, too much external heat can raise BMR as the body expends energy to cool off internal organs. BMR increases approximately 7% for every increase of 1.36 degrees Fahrenheit in the body's internal temperature.</p>
+                                      <p><b>Diet</b> &ndash; Small, routinely dispersed meals increase BMR. On the other hand, starvation can reduce BMR by as much as 30%. Similar to a phone that goes into power-saving mode during the last 5% of its battery, a human body will make sacrifices such as energy levels, moods, upkeep of bodily physique, and brain functions in order to more efficiently utilize what little caloric energy is being used to sustain it.</p>
+                                      <p><b>Pregnancy</b> &ndash; Ensuring the livelihood of a separate fetus internally increases BMR. This is why pregnant women tend to eat more than usual. Also, menopause can increase or decrease BMR depending on hormonal changes.</p>
+                                      <p><b>Supplements</b> &ndash; Certain supplements or drugs raise BMR, mostly to fuel weight loss. Caffeine is a common one.</p>
+
+                                      <h3>BMR Tests</h3>
+                                      <p>Online BMR tests with rigid formulas are not the most accurate method of determining an individual's BMR. It is better to consult a certified specialist or measure BMR through a calorimetry device. These handheld devices are available in many health and fitness clubs, doctor offices, and weight-loss clinics.</p>
+
+                                      <h3>Resting Metabolic Rate</h3>
+                                      <p>While the two are used interchangeably, there is a key difference in their definitions. Resting metabolic rate, or RMR for short, is the rate at which the body burns energy in a relaxed, but not fully inactive state. It is also sometimes defined as resting energy expenditure, or REE. BMR measurements must meet total physiological equilibrium while RMR conditions of measurement can be altered and defined by contextual limitations.</p>
+
+                                      <h3>Modern Wisdom</h3>
+                                      <p>A 2005 meta-analysis study on BMR* showed that when controlling all factors of metabolic rate, there is still a 26% unknown variance between people. Essentially, an average person eating an average diet will likely have expected BMR values, but there are factors that are still not understood that determines BMR precisely. </p>
+                                      <p>Therefore, all BMR calculations, even using the most precise methods through specialists, will not be perfectly accurate in their measurements. Not all human bodily functions are well understood just yet, so calculating total daily energy expenditure (TDEE) derived from BMR estimates are just that, estimates. When working towards any sort of health or fitness goal, BMR can aid in laying down the foundations, but from there on, it has little else to offer. A calculated BMR and thus TDEE may result in unsatisfactory results because of their rough estimates, but maintaining a daily journal of exercise, food consumption, etc., can help track the factors that lead to any given results and help determine what works, as well as what needs to be improved upon. Tracking progress in said journal and making adjustments over time as needed is generally the best indication of progress towards reaching personal goals. </p>
+
+
+                                                                    </div>
+                                                              </div>
+
+
+
+
+                                                              <!-- image -->
+                                                              <div class="col-lg-7">
+                                                                <img src="" />
+                                                              </div>
+
+                                                        </div>
+
+                        
+                </div>
+                <!-- End of Main Content -->
+
+            <!-- footer -->
+            {% include 'includes/footer.html' %}
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="{{url_for('login')}}">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{url_for('static',filename='vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script> 
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{url_for('static',filename='vendor/jquery-easing/jquery.easing.min.js')}}"></script> 
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{url_for('static',filename='js/sb-admin-2.min.js')}}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{{url_for('static',filename='vendor/chart.js/Chart.min.js')}}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{url_for('static',filename='js/demo/chart-area-demo.js')}}"></script>
+    <script src="{{url_for('static',filename='js/demo/chart-pie-demo.js')}}"></script>
+
+    <!-- bmi js -->
+    <script src="{{url_for('static',filename='js/bmr.js')}}"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

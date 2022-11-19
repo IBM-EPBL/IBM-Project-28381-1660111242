@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>FIT-NUTRO - BMI</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="{{url_for('static',filename='vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="{{url_for('static',filename='css/sb-admin-2.min.css')}}">
+</head>
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- side bar -->
+        {% include 'includes/sidebar.html' %}
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- top bar -->
+                {% include 'includes/topbar.html' %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                        <!-- body content -->
+   <!-- Page Heading -->
+   <h1 class="h3 mb-1 text-gray-800">BMI</h1>
+   <p class="mb-4">The Body Mass Index (BMI) Calculator can be used to calculate BMI value and corresponding weight status while taking age into consideration.</p>
+ 
+   <!-- Content Row -->
+   <div class="row">
+ 
+       <div class="col-lg-8">
+ 
+           <!-- Overflow Hidden -->
+           <div class="card mb-4">
+               <div class="card-header py-3">
+                   <h6 class="m-0 font-weight-bold text-primary">BMI calcator</h6>
+               </div>
+               <div class="card-body">
+                   <form class="w-50 m-auto" onsubmit="return false">
+                       <div class="form-group">
+                           <label>Weight:</label>
+                           <input type="number" name="weight" id="weight" placeholder="Weight in kg"  class="form-control">
+                           <span  class="text-danger" id="weight_error"></span>
+                       </div>
+                       <br>
+                       <div class="form-group">
+                           <label>Height:</label>
+                           <input type="number" name="height" id="height" placeholder="Height in cm"  class="form-control">
+                           <span class="text-danger" id="height_error"></span>
+                       </div>
+                       <br>
+                       <div>
+                           <button type="submit" class="btn btn-success" onclick="getbmivalue()">
+                               check BMI                            
+                           </button>
+                       </div>
+                       <br>
+                       <div>
+                           <span id="bmi" class="text-info"></span>
+                       </div>
+                   </form>
+               </div>
+               <div class="card-footer text-center">
+                   <span id="result" class="text-primary"></span>
+               </div>
+           </div>
+ 
+ 
+       </div>
+
+       <div class="col-lg-4">
+           <div class="card mb-4">
+           <div class="card-header py-3">
+               <h6 class="m-0 font-weight-bold text-primary">Result</h6>
+           </div>
+           <canvas id="speedometer" width="440" height="220">Canvas not available.</canvas>
+           <br>
+           <div class=" text">
+               &ensp;&ensp;
+               <span class="btn btn-warning">
+               </span>
+               <span class="text">Under weight</span>
+           </div>
+           <br>
+           <div  class="text">
+               &ensp;&ensp;
+               <span class="btn btn-success">
+               </span>
+               <span class="text">Normal Weghit</span>
+           </div>
+           <br>
+           <div class=" text">
+               &ensp;&ensp;
+               <span class="btn btn-danger">
+               </span>
+               <span class="text">Over Weight</span>
+           </div>
+           </div>
+       </div>
+
+
+       <div class="col-lg-12">
+
+           <!-- Roitation Utilities -->
+           <div class="card">
+               <div class="card-header py-3">
+                   <h6 class="m-0 font-weight-bold text-primary">Information about BMI</h6>
+               </div>
+               <div class="card-body">
+                   <br><h3>BMI introduction</h3>
+            <p>BMI is a measurement of a person's leanness or corpulence based on their height and weight, and is intended to quantify tissue mass. It is widely used as a general indicator of whether a person has a healthy body weight for their height. Specifically, the value obtained from the calculation of BMI is used to categorize whether a person is underweight, normal weight, overweight, or obese depending on what range the value falls between. These ranges of BMI vary based on factors such as region and age, and are sometimes further divided into subcategories such as severely underweight or very severely obese. Being overweight or underweight can have significant health effects, so while BMI is an imperfect measure of healthy body weight, it is a useful indicator of whether any additional testing or action is required. Refer to the table below to see the different categories based on BMI that are used by the calculator.</p>
+            <h3>BMI table for adults</h3>
+            <p>This is the World Health Organization's (WHO) recommended body weight based on BMI values for adults. It is used for both men and women, age 20 or older.</p>
+            <table class="cinfoT" align="center">
+            <tr><td class="cinfoHd">Category</td><td class="cinfoHdL">BMI range - kg/m<sup>2</sup></td></tr>
+            <tr><td>Severe Thinness</td><td class="cinfoBodL">&lt; 16</td></tr>
+            <tr><td>Moderate Thinness</td><td class="cinfoBodL">16 - 17</td></tr>
+            <tr><td>Mild Thinness</td><td class="cinfoBodL">17 - 18.5</td></tr>
+
+            <tr><td>Normal</td><td class="cinfoBodL">18.5 - 25</td></tr>
+            <tr><td>Overweight</td><td class="cinfoBodL">25 - 30</td></tr>
+            <tr><td>Obese Class I</td><td class="cinfoBodL">30 - 35</td></tr>
+            <tr><td>Obese Class II</td><td class="cinfoBodL">35 - 40</td></tr>
+            <tr><td>Obese Class III</td><td class="cinfoBodL">&gt; 40</td></tr>
+            </table>
+
+            <h3>BMI chart for adults</h3>
+            <p>This is a graph of BMI categories based on the World Health Organization data. The dashed lines represent subdivisions within a major categorization.</p>
+
+            <p style="text-align:center;"><img src="//d26tpo4cm8sb6k.cloudfront.net/img/bmi-chart.gif" width="529" height="441" /></p>
+            <h3>BMI table for children and teens, age 2-20</h3>
+            <p>The Centers for Disease Control and Prevention (CDC) recommends BMI categorization for children and teens between age 2 and 20.</p>
+            <table class="cinfoT" align="center">
+            <tr><td class="cinfoHd">Category</td><td class="cinfoHdL">Percentile Range</td></tr>
+            <tr><td>Underweight</td><td class="cinfoBodL">&lt;5%</td></tr>
+            <tr><td>Healthy weight</td><td class="cinfoBodL">5% - 85%</td></tr>
+            <tr><td>At risk of overweight</td><td class="cinfoBodL">85% - 95%</td></tr>
+            <tr><td>Overweight</td><td class="cinfoBodL">&gt;95%</td></tr>
+            </table>
+
+            <h3>BMI chart for children and teens, age 2-20</h3>
+            <p>The Centers for Disease Control and Prevention (CDC) BMI-for-age percentiles growth charts.</p>
+            <a href="/pdf/chart-2015.pdf">Chart for boys</a><br />
+            <a href="/pdf/chart-2016.pdf">Chart for girls</a>
+
+            <h3>Risks associated with being overweight</h3>
+            <p>Being overweight increases the risk of a number of serious diseases and health conditions. Below is a list of said risks, according to the Centers for Disease Control and Prevention (CDC):</p>
+            <ul>
+            <li>High blood pressure</li>
+            <li>Higher levels of LDL cholesterol, which is widely considered "bad cholesterol," lower levels of HDL cholesterol, considered to be good cholesterol in moderation, and high levels of triglycerides</li>
+            <li>Type II diabetes</li>
+            <li>Coronary heart disease</li>
+            <li>Stroke</li>
+            <li>Gallbladder disease</li>
+            <li>Osteoarthritis, a type of joint disease caused by breakdown of joint cartilage</li>
+            <li>Sleep apnea and breathing problems</li>
+            <li>Certain cancers (endometrial, breast, colon, kidney, gallbladder, liver)</li>
+            <li>Low quality of life</li>
+            <li>Mental illnesses such as clinical depression, anxiety, and others</li>
+            <li>Body pains and difficulty with certain physical functions</li>
+            <li>Generally, an increased risk of mortality compared to those with a healthy BMI</li>
+            </ul>
+            <p>As can be seen from the list above, there are numerous negative, in some cases fatal, outcomes that may result from being overweight. Generally, a person should try to maintain a BMI below 25 kg/m<sup>2</sup>, but ideally should consult their doctor to determine whether or not they need to make any changes to their lifestyle in order to be healthier.</p>
+
+            <h3>Risks associated with being underweight</h3>
+            <p>Being underweight has its own associated risks, listed below:</p>
+            <ul>
+            <li>Malnutrition, vitamin deficiencies, anemia (lowered ability to carry blood vessels)</li>
+            <li>Osteoporosis, a disease that causes bone weakness, increasing the risk of breaking a bone</li>
+            <li>A decrease in immune function</li>
+            <li>Growth and development issues, particularly in children and teenagers</li>
+            <li>Possible reproductive issues for women due to hormonal imbalances that can disrupt the menstrual cycle. Underweight women also have a higher chance of miscarriage in the first trimester</li>
+            <li>Potential complications as a result of surgery</li>
+            <li>Generally, an increased risk of mortality compared to those with a healthy BMI</li>
+            </ul>
+            <p>In some cases, being underweight can be a sign of some underlying condition or disease such as anorexia nervosa, which has its own risks. Consult your doctor if you think you or someone you know is underweight, particularly if the reason for being underweight does not seem obvious.</p>
+
+            <h3>Limitations of BMI</h3>
+            <p>Although BMI is a widely used and useful indicator of healthy body weight, it does have its limitations. BMI is only an estimate that cannot take body composition into account. Due to a wide variety of body types as well as distribution of muscle, bone mass, and fat, BMI should be considered along with other measurements rather than being used as the sole method for determining a person's healthy body weight.</p>
+
+            <p><b>In adults:</b></p>
+            <p>BMI cannot be fully accurate because it is a measure of excess body weight, rather than excess body fat. BMI is further influenced by factors such as age, sex, ethnicity, muscle mass, and body fat, and activity level, among others. For example, an older person who is considered a healthy weight, but is completely inactive in their daily life may have significant amounts of excess body fat even though they are not heavy. This would be considered unhealthy, while a younger person with higher muscle composition of the same BMI would be considered healthy. In athletes, particularly bodybuilders who would be considered overweight due to muscle being heavier than fat, it is entirely possible that they are actually at a healthy weight for their body composition. Generally, according to the CDC:</p>
+            <ul>
+            <li>Older adults tend to have more body fat than younger adults with the same BMI.</li>
+            <li>Women tend to have more body fat than men for an equivalent BMI.</li>
+            <li>Muscular individuals and highly trained athletes may have higher BMIs due to large muscle mass.</li>
+            </ul>
+
+            <p><b>In children and adolescents:</b></p>
+            <p>The same factors that limit the efficacy of BMI for adults can also apply to children and adolescents. Additionally, height and level of sexual maturation can influence BMI and body fat among children. BMI is a better indicator of excess body fat for obese children than it is for overweight children, whose BMI could be a result of increased levels of either fat or fat-free mass (all body components except for fat, which includes water, organs, muscle, etc.). In thin children, the difference in BMI can also be due to fat-free mass.</p>
+            <p>That being said, BMI is fairly indicative of body fat for 90-95% of the population, and can effectively be used along with other measures to help determine an individual's healthy body weight.</p>
+
+            <h3>BMI formula</h3>
+            <p>Below are the equations used for calculating BMI in the International System of Units (SI) and the US customary system (USC) using a 5'10", 160-pound individual as an example:</p>
+            <table align="center"><tr><td>
+            <div style="padding-top:5px;"><b>USC Units:</b></div>
+            <table cellspacing="0" cellpadding="0" style="padding-left: 20px;"><tr>
+            <td> BMI = 703 &#215;&nbsp;</td>
+            <td><table cellspacing="0" cellpadding="0"><tr><td>mass (lbs)</td></tr><tr><td bgcolor="#000000" height="1"></td></tr><tr><td>height<sup>2</sup> (in)</td></tr></table></td>
+            <td align="right">= 703 &#215;&nbsp;</td>
+            <td><table cellspacing="0" cellpadding="0"><tr><td>160</td></tr><tr><td bgcolor="#000000" height="1"></td></tr><tr><td>70<sup>2</sup></td></tr></table></td>
+            <td align="right">= 22.96&nbsp;</td>
+            <td><table cellspacing="0" cellpadding="0"><tr><td>kg</td></tr><tr><td bgcolor="#000000" height="1"></td></tr><tr><td>m<sup>2</sup></td></tr></table></td>
+            </tr></table>
+
+            <div style="padding-top:15px;"><b>SI, Metric Units:</b></div>
+            <table cellspacing="0" cellpadding="0" style="padding-left: 20px;"><tr>
+            <td> BMI =&nbsp;</td>
+            <td colspan="2"><table cellspacing="0" cellpadding="0"><tr><td>mass (kg)</td></tr><tr><td bgcolor="#000000" height="1"></td></tr><tr><td>height<sup>2</sup> (m)</td></tr></table></td>
+            <td align="right">&nbsp;=&nbsp;</td>
+            <td colspan="2"><table cellspacing="0" cellpadding="0"><tr><td>72.57</td></tr><tr><td bgcolor="#000000" height="1"></td></tr><tr><td>1.78<sup>2</sup></td></tr></table></td>
+            <td align="right">&nbsp;=&nbsp;</td>
+            <td>22.90</td>
+            <td><table cellspacing="0" cellpadding="0"><tr><td>kg</td></tr><tr><td bgcolor="#000000" height="1"></td></tr><tr><td>m<sup>2</sup></td></tr></table></td>
+            </tr></table>
+            </td></tr></table>
+
+            <h3>Ponderal Index</h3>
+            <p>The Ponderal Index (PI) is similar to BMI in that it measures the leanness or corpulence of a person based on their height and weight. The main difference between the PI and BMI is the cubing rather than squaring of the height in the formula (provided below). While BMI can be a useful tool when considering large populations, it is not reliable for determining leanness or corpulence in individuals. Although the PI suffers from similar considerations, the PI is more reliable for use with very tall or short individuals, while BMI tends to record uncharacteristically high or low body fat levels for those on the extreme ends of the height and weight spectrum. Below is the equation for computing the PI of an individual using USC, again using a 5'10", 160-pound individual as an example:</p>
+
+            <table align="center"><tr><td>
+            <div style="padding-top:5px;"><b>USC Units:</b></div>
+            <table cellspacing="0" cellpadding="0" style="padding-left: 20px;"><tr>
+            <td> PI =&nbsp;</td>
+            <td><table cellspacing="0" cellpadding="0"><tr><td align="center">height (in)</td></tr><tr><td bgcolor="#000000" height="1"></td></tr><tr><td><span class="bigtext">&#8731;</span><span style="text-decoration:overline;">mass (lbs)</span></td></tr></table></td>
+            <td>&nbsp;=&nbsp;</td>
+            <td><table cellspacing="0" cellpadding="0"><tr><td align="center">70</td></tr><tr><td bgcolor="#000000" height="1"></td></tr><tr><td><span class="bigtext">&#8731;</span><span style="text-decoration:overline;">160</span></td></tr></table></td>
+            <td>&nbsp;= 12.89</td>
+            <td><table cellspacing="0" cellpadding="0"><tr><td align="center">in</td></tr><tr><td bgcolor="#000000" height="1"></td></tr><tr><td><span class="bigtext">&#8731;</span><span style="text-decoration:overline;">lbs</span></td></tr></table></td>
+            </tr></table>
+
+            <div style="padding-top:15px;"><b>SI, Metric Units:</b></div>
+            <table cellspacing="0" cellpadding="0" style="padding-left: 20px;"><tr>
+            <td> PI =&nbsp;</td>
+            <td><table cellspacing="0" cellpadding="0"><tr><td>mass (kg)</td></tr><tr><td bgcolor="#000000" height="1"></td></tr><tr><td>height<sup>3</sup> (m)</td></tr></table></td>
+            <td>&nbsp;=&nbsp;</td>
+            <td><table cellspacing="0" cellpadding="0"><tr><td>72.57</td></tr><tr><td bgcolor="#000000" height="1"></td></tr><tr><td>1.78<sup>3</sup></td></tr></table></td>
+            <td>&nbsp;= 12.87</td>
+            <td><table cellspacing="0" cellpadding="0"><tr><td>kg</td></tr><tr><td bgcolor="#000000" height="1"></td></tr><tr><td>m<sup>3</sup></td></tr></table></td>
+            </tr></table>
+            </td></tr></table>
+
+
+               </div>
+           </div>
+   </div>
+ 
+
+                        
+                </div>
+                <!-- End of Main Content -->
+
+            <!-- footer -->
+            {% include 'includes/footer.html' %}
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="{{url_for('login')}}">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{url_for('static',filename='vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script> 
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{url_for('static',filename='vendor/jquery-easing/jquery.easing.min.js')}}"></script> 
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{url_for('static',filename='js/sb-admin-2.min.js')}}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{{url_for('static',filename='vendor/chart.js/Chart.min.js')}}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{url_for('static',filename='js/demo/chart-area-demo.js')}}"></script>
+    <script src="{{url_for('static',filename='js/demo/chart-pie-demo.js')}}"></script>
+
+    <!-- bmi js -->
+    <script src="{{url_for('static',filename='js/bmi.js')}}"></script>
+</body>
+
+</html>
+
+
+

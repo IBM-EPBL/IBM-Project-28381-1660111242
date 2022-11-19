@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>FIT-NUTRO - Diet Tracker</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="{{url_for('static',filename='vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="{{url_for('static',filename='css/sb-admin-2.min.css')}}">
+</head>
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- side bar -->
+        {% include 'includes/sidebar.html' %}
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- top bar -->
+                {% include 'includes/topbar.html' %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                        <!-- body content -->
+                    
+  <!-- Page Heading -->
+  <h1 class="h3 mb-1 text-gray-800">Diet Tracker</h1>
+  <p class="mb-4">It can help you remember what you have eaten that day. If you are also tracking calories, you can see where you can improve if you are trying to achieve a goal. It will let you see if you are eating too much or NOT enough.
+  <br></p>
+  
+       <!-- Content Row -->
+  <div class="row">
+  
+  <div class="col-xl-12 col-lg-7">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+               <h6 class="m-0 font-weight-bold text-primary">Diet Tracker</h6>
+        </div>
+        <p class="text-danger">
+
+        </p>
+        <div class="card-body">
+            <form method="post" action="/diet_tracker" >
+                <div class="form-group row">
+                    <label for="breakfast" class="col-sm-2 col-form-label">breakfast calories</label>
+                    <div class="col-sm-10">
+                      <input type="number" name="breakfast" class="form-control" id="breakfast" placeholder="How many calories did you have for breakfast ?">
+                      <span  class="text-danger" id="breakfast_error"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="lunch" class="col-sm-2 col-form-label">lunch calories</label>
+                    <div class="col-sm-10">
+                      <input type="number" name="lunch" class="form-control" id="lunch" placeholder="How many calories did you have for lunch?">
+                      <span  class="text-danger" id="lunch_error"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="dinner" class="col-sm-2 col-form-label">dinner calories</label>
+                    <div class="col-sm-10">
+                      <input type="number" name="dinner" class="form-control" id="dinner" placeholder="How many calories did you have for Dinner?">
+                      <span  class="text-danger" id="dinner_error"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="exercise" class="col-sm-2 col-form-label">exercise</label>
+                    <div class="col-sm-10">
+                      <input type="number" name="exercise" class="form-control" id="exercise" placeholder="How many calories did you burn exercise?">
+                      <span  class="text-danger" id="exercise_error"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="bmr" class="col-sm-2 col-form-label">bmr</label>
+                    <div class="col-sm-10">
+                      <input type="number" name="bmr" class="form-control" id="bmr" placeholder="What os your basic metabolic rate?"><span  class="text-danger" id="bmr_error"></span><br>
+                      <span>if you want calucate bmr value,<a href="{{url_for('bmr')}}">Click here</a></span>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <input type="submit"  value="Submit" class="btn btn-success" >
+                </div>
+            </form>
+        </div>
+        <div class="card-footer text-center">
+            <span class="text-danger">{{result}}</span>
+        </div>
+    </div>
+       </div>
+       <!-- end form -->
+
+                    <!-- heading -->
+                    <div class="col-lg-12">
+  
+                        <!-- Roitation Utilities -->
+                        
+                        <div class="card">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Information about Diet Plan </h6>
+                            </div>
+                            <div class="card-body">
+                                <h2>Overview</h2>   
+                                <br>
+                                <p>Consuming a healthy diet throughout the life-course helps to prevent malnutrition in all its forms as well as a range of noncommunicable diseases (NCDs) and conditions. However, increased production of processed foods, rapid urbanization and changing lifestyles have led to a shift in dietary patterns. People are now consuming more foods high in energy, fats, free sugars and salt/sodium, and many people do not eat enough fruit, vegetables and other dietary fibre such as whole grains.</p>
+                                <p>The exact make-up of a diversified, balanced and healthy diet will vary depending on individual characteristics (e.g. age, gender, lifestyle and degree of physical activity), cultural context, locally available foods and dietary customs. However, the basic principles of what constitutes a healthy diet remain the same.</p>
+                             </div>
+                             <br>
+                             <h3>For adults</h3>
+                             <br>
+                             <p>A healthy diet includes the following:</p>
+                             <ul>
+                                <li>Fruit, vegetables, legumes (e.g. lentils and beans), nuts and whole grains (e.g. unprocessed maize, millet, oats, wheat and brown rice).</li>
+                                <li>At least 400 g (i.e. five portions) of fruit and vegetables per day (2), excluding potatoes, sweet potatoes, cassava and other starchy roots.</li>
+                                <li>Less than 10% of total energy intake from free sugars (2, 7), which is equivalent to 50 g (or about 12 level teaspoons) for a person of healthy body weight consuming about 2000 calories per day, but ideally is less than 5% of total energy intake for additional health benefits (7). Free sugars are all sugars added to foods or drinks by the manufacturer, cook or consumer, as well as sugars naturally present in honey, syrups, fruit juices and fruit juice concentrates.</li>
+                                <li>Less than 30% of total energy intake from fats (1, 2, 3). Unsaturated fats (found in fish, avocado and nuts, and in sunflower, soybean, canola and olive oils) are preferable to saturated fats (found in fatty meat, butter, palm and coconut oil, cream, cheese, ghee and lard) and trans-fats of all kinds, including both industrially-produced trans-fats (found in baked and fried foods, and pre-packaged snacks and foods, such as frozen pizza, pies, cookies, biscuits, wafers, and cooking oils and spreads) and ruminant trans-fats (found in meat and dairy foods from ruminant animals, such as cows, sheep, goats and camels). It is suggested that the intake of saturated fats be reduced to less than 10% of total energy intake and trans-fats to less than 1% of total energy intake (5). In particular, industrially-produced trans-fats are not part of a healthy diet and should be avoided (4, 6).</li>
+                                <li>Less than 5  g of salt (equivalent to about one teaspoon) per day (8).  Salt should be iodized.</li>
+                             </ul>
+                             
+                             <h3>For infants and young children</h3><p>In the first 2 years of a child&rsquo;s life, optimal nutrition fosters healthy growth and improves cognitive development. It also reduces the risk of becoming overweight or obese and developing NCDs later in life.</p><p>Advice on a healthy diet for infants and children is similar to that for adults, but the following elements are also important:</p><ul><li>Infants should be breastfed exclusively during the first 6 months of life.</li><li>Infants should be breastfed continuously until 2 years of age and beyond.</li><li>From 6 months of age, breast milk should be complemented with a variety of adequate, safe and nutrient-dense foods. Salt and sugars should not be added to complementary foods.</li></ul><h2>Practical advice on maintaining a healthy diet</h2><h3>Fruit and vegetables</h3><p>Eating at least 400&nbsp;g, or five portions, of fruit and vegetables per day reduces the risk of NCDs <em>(2)</em> and helps to ensure an adequate daily intake of dietary fibre.</p><p>Fruit and vegetable intake can be improved by:</p><ul ><li>always including vegetables in meals;</li><li>eating fresh fruit and raw vegetables as snacks;</li><li>eating fresh fruit and vegetables that are in season; and</li><li>eating a variety of fruit and vegetables.</li></ul><h3>Fats</h3><p>Reducing the amount of total fat intake to less than 30% of total energy intake helps to prevent unhealthy weight gain in the adult population <em>(1, 2, 3)</em>. Also, the risk of developing NCDs is lowered by:</p><ul><li>reducing saturated fats to less than 10% of total energy intake;</li><li>reducing <em>trans</em>-fats to less than 1% of total energy intake; and</li><li>replacing both saturated fats and <em>trans-</em>fats with unsaturated fats <em>(2, 3)</em> &ndash; in particular, with polyunsaturated fats.</li></ul><p>Fat intake, especially saturated fat and industrially-produced <em>trans-</em>fat intake, can be reduced by:</p><ul><li>steaming or boiling instead of frying when cooking;</li><li>replacing butter, lard and ghee with oils rich in polyunsaturated fats, such as soybean, canola (rapeseed), corn, safflower and sunflower oils;</li><li>eating reduced-fat dairy foods and lean meats, or trimming visible fat from meat; and </li><li>limiting the consumption of baked and fried foods, and pre-packaged snacks and foods (e.g. doughnuts, cakes, pies, cookies, biscuits and wafers) that contain industrially-produced <em>trans-</em>fats.</li></ul><h3>Salt, sodium and potassium</h3><p>Most people consume too much sodium through salt (corresponding to consuming an average of 9&ndash;12&nbsp;g of salt per day) and not enough potassium (less than 3.5&nbsp;g). High sodium intake and insufficient potassium intake contribute to high\r\n        blood pressure, which in turn increases the risk of heart disease and stroke <em>(8, 11)</em>.</p><p>Reducing salt intake to the recommended level of less than 5 g per day could prevent 1.7&nbsp;million deaths each year <em>(12)</em>.</p><p>People are often unaware of the amount of salt they consume. In many countries, most salt &nbsp;comes from processed foods (e.g. ready meals; processed meats such as bacon, ham and salami; cheese; and salty snacks) or from foods consumed frequently\r\n        in large amounts (e.g. bread). Salt is also added to foods during cooking (e.g. bouillon, stock cubes, soy sauce and fish sauce) or at the point of consumption (e.g. table salt).</p><p>Salt intake can be reduced by:</p><ul><li>limiting the amount of salt and high-sodium condiments (e.g. soy sauce, fish sauce and bouillon) when cooking and preparing foods;</li><li>not having salt or high-sodium sauces on the table;</li><li>limiting the consumption of salty snacks; and</li><li>choosing products with lower sodium content.</li></ul><p>Some food manufacturers are reformulating recipes to reduce the sodium content of their products, and people should be encouraged to check nutrition labels to see how much sodium is in a product before purchasing or consuming it.</p><p>Potassium can mitigate the negative effects of elevated sodium consumption on blood pressure. Intake of potassium can be increased by consuming fresh fruit and vegetables.</p><h3>Sugars</h3><p>In both adults and children, the intake of free sugars should be reduced to less than 10% of total energy intake <em>(2, 7)</em>. &nbsp;A reduction to less than 5% of total energy intake would provide additional health benefits <em>(7)</em>. </p><p>Consuming free sugars increases the risk of dental caries (tooth decay). Excess calories from foods and drinks high in free sugars also contribute to unhealthy weight gain, which can lead to overweight and obesity. Recent evidence also shows that\r\n        free sugars influence blood pressure and serum lipids, and suggests that a reduction in free sugars intake reduces risk factors for cardiovascular diseases <em>(13)</em>.</p><p>Sugars intake can be reduced by:</p><ul><li>limiting the consumption of foods and drinks containing high amounts of sugars, such as sugary snacks, candies and sugar-sweetened beverages (i.e. all types of beverages containing free sugars &ndash; these include carbonated or non‐carbonated\r\n            soft drinks, fruit or vegetable juices and drinks, liquid and powder concentrates, flavoured water, energy and sports drinks, ready‐to‐drink tea, ready‐to‐drink coffee and flavoured milk drinks); and</li><li>eating fresh fruit and raw vegetables as snacks instead of sugary snacks.</li></ul><h2>How to promote healthy diets</h2><p>Diet evolves over time, being influenced by many social and economic factors that interact in a complex manner to shape individual dietary patterns. These factors include income, food prices (which will affect the availability and affordability of\r\n        healthy foods), individual preferences and beliefs, cultural traditions, and geographical and environmental aspects (including climate change). Therefore, promoting a healthy food environment &ndash; including food systems that promote a diversified,\r\n        balanced and healthy diet &ndash; requires the involvement of multiple sectors and stakeholders, including government, and the public and private sectors.</p><p>Governments have a central role in creating a healthy food environment that enables people to adopt and maintain healthy dietary practices. Effective actions by policy-makers to create a healthy food environment include the following:</p><ul ><li>Creating coherence in national policies and investment plans &ndash; including trade, food and agricultural policies &ndash; to promote a healthy diet and protect public health through:</li><br /><ul ><li>increasing incentives for producers and retailers to grow, use and sell fresh fruit and vegetables;</li><li>reducing incentives for the food industry to continue or increase production of processed foods containing high levels of saturated fats, <em>trans</em>-fats, free sugars and salt/sodium;</li><li>encouraging reformulation of food products to reduce the contents of saturated fats, <em>trans-</em>fats, free sugars and salt/sodium, with the goal of eliminating industrially-produced <em>trans-</em>fats;</li>
+                         </div>
+
+                     </div>
+                        
+                </div>
+                <!-- End of Main Content -->
+
+            <!-- footer -->
+            {% include 'includes/footer.html' %}
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="{{url_for('Login')}}">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{url_for('static',filename='vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script> 
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{url_for('static',filename='vendor/jquery-easing/jquery.easing.min.js')}}"></script> 
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{url_for('static',filename='js/sb-admin-2.min.js')}}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{{url_for('static',filename='vendor/chart.js/Chart.min.js')}}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{url_for('static',filename='js/demo/chart-area-demo.js')}}"></script>
+    <script src="{{url_for('static',filename='js/demo/chart-pie-demo.js')}}"></script>
+
+    <!-- diet js -->
+    <script src="{{url_for('static',filename='js/diet.js')}}"></script>
+</body>
+
+</html>
+
+
+
